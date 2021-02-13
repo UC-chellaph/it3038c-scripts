@@ -1,19 +1,50 @@
 from datetime import date
 
-myYear = int(input('What year were you born in?: '))
-while myYear < 1910:
-    print("You're not that old")
-    myYear = int(input('Please enter your real year of Birth >.< : '))
+# For Year
 
-myMonth = int(input('What month were you born in?: '))
-while myMonth > 12:
-    print("There's only 12 months in a Year")
-    myMonth = int(input('What month were you born in?: '))
+while True:
+    try:
+        myYear = int(input('What year were you born in?: '))
+        while myYear < 1910 or myYear > 2021:
+            myYear = int(input('Please enter your real year of Birth >.< : '))
+    except ValueError:
+        print("Please enter a numeric value only")
+        # Return to Start of Loop
+        continue
+    else:
+        # age is a number: So break loop
+        break
 
-myDay = int(input('What day were you born on?: '))
-while myDay > 31:
-    print("There can be a maximum of 31 days in a month")
-    myMonth = int(input('What day were you born on?: '))
+# For Month
+
+while True:
+    try:
+        myMonth = int(input('What month were you born in?: '))
+        while myMonth < 1 or myMonth > 12:
+            myMonth = int(input('There are only 12 months in a year. Please enter your real month of birth : '))
+    except ValueError:
+        print("Please enter a numeric value only")
+        # Return to Start of Loop
+        continue
+    else:
+        # age is a number: So break loop
+        break
+        
+# For Day
+
+while True:
+    try:
+        myDay = int(input('What day were you born on?: '))
+        while myDay > 31 or myDay < 1:
+            myDay = int(input('There are only 31 days at most in a month. Please enter your real date of birth : '))
+    except ValueError:
+        print("Please enter a numeric value only")
+        # Return to Start of Loop
+        continue
+    else:
+        # age is a number: So break loop
+        break
+
 
 DoB = date(myYear, myMonth, myDay)
 
@@ -24,7 +55,7 @@ def calculateAge(birthdate):
 
 
 def daysToSeconds(days):
-    seconds = float(days*86400)
+    seconds = float(days * 86400)
     return seconds
 
 
