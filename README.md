@@ -20,7 +20,7 @@ Download an image from the internet and save it to your hard drive.
 Now, in Python, run the following code
 ```python
 import pyodbc
-connection_String = (Driver={Your Driver};Server={YourServer};Database={YourDB};"
+connection_String = "(Driver={Your Driver};Server={YourServer};Database={YourDB};)"
 pyodbc.connect(connection_String)
 connection = pyodbc.connect(connection_String)
 
@@ -35,7 +35,7 @@ The syntax above will initiate and close a connection to your Database. It is es
 
 ```python
 myCursor = connection.cursor()
-variable1 = myCurson.execute("Your SQL Here")
+variable1 = myCursor.execute("Your SQL Here")
 
 
 # The same can also be done by 
