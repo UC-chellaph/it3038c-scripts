@@ -9,7 +9,7 @@
 The Script created in this Lab retrieves the top 25 most expensive players for each of the 20 Premier League clubs. It produces the output data in a dataframe, as shown below. 
 The Data is scraped from Transfermarkt.co.uk
 
-!["Demo by Prateek Chellani"](https://i.imgur.com/8esW3SN.mp4 )
+!["Demo by Prateek Chellani"](https://i.imgur.com/8esW3SN.gif )
 
 
 ### LAB 7 Submission
