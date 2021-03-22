@@ -4,6 +4,14 @@
  Feel free to leave feedback on how any of the scripts can be improved!
  Thanks
 
+### LAB 8 Submission
+
+The Script created in this Lab retrieves the top 25 most expensive players for each of the 20 Premier League clubs. It produces the output data in a dataframe, as shown below. 
+The Data is scraped from Transfermarkt.co.uk
+
+![alt text](https://i.imgur.com/8esW3SN.mp4 "Demo by Prateek Chellani")
+
+
 ### LAB 7 Submission
 
 Here is how you can run a Python script that I created, which uses a plugin called pyodbc 
