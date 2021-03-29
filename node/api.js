@@ -1,5 +1,5 @@
 var http = require("http");
-var data = require("C:/Users/Administrator/Downloads/widgets.json");
+var data = require("C:/Users/Prateek/Desktop/University Of Cincinnati/Junior Year/Spring 2021/IT3038C - Scripting Languages with AJ Bothe/Lab 9/widgets.json");
 
 var server = http.createServer(function(req, res){
     if (req.url === "/") {
