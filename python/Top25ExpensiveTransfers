@@ -1,0 +1,76 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'}
+
+# link = "https://www.transfermarkt.co.uk/ajax-amsterdam/transferrekorde/verein/610/"
+
+def getRecordTransfers(teamname, teamID):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'}
+
+    link = "https://www.transfermarkt.co.uk/" + teamname + "/transferrekorde/verein/" + str(teamID)
+    r = requests.get(link, headers=headers)
+
+    # Creating a Soup
+    soup = BeautifulSoup(r.content, 'html.parser')
+
+    Player_Name = []  # List that will receive all the players names
+
+    player_tag = soup.find_all("a", {"class": "spielprofil_tooltip"})
+
+    for tag in player_tag:
+        Player_Name.append(tag.text)
+
+    previousCountry = []  # List that will receive all the names of the countries of the players’s previous leagues.
+
+    prevCountryTag = soup.find_all("td", {"class": None})
+
+    for tag_country in prevCountryTag:
+        countryFlag = tag_country.find("img", {"class": "flaggenrahmen"}, {"title": True})
+
+        if (countryFlag != None):  # We will test if we have found any matches than add them
+            previousCountry.append(countryFlag['title'])
+
+    transfer_fee = []
+
+    feeTag = soup.find_all("td", {"class": "rechts hauptlink"})
+
+    for tagTransferFee in feeTag:
+        PriceTag = tagTransferFee.text
+        PriceTag = PriceTag.replace("£", "").replace("m", "")
+        PriceTag = float(PriceTag)
+        transfer_fee.append(PriceTag)
+
+    df = pd.DataFrame({"Player Name": Player_Name, "Transfer Fee (In Millions of Euros)": transfer_fee,
+                       "Nationality": previousCountry})
+
+    print(df)
+
+if 5 == 5:
+    teamnames = ["manchester-city", "tottenham-hotspur", "fc-arsenal", "aston-villa", "brighton-amp-hove-albion",
+                 "fc-burnley", "fc-chelsea", "crystal-palace", "fc-everton", "fc-fulham", "leeds-united",
+                 "leicester-city", "fc-liverpool", "manchester-united", "newcastle-united", "sheffield-united",
+                 "fc-southampton", "west-bromwich-albion", "west-ham-united", "wolverhampton-wanderers"]
+
+    teamIDs = ["281", "148", "11", "405", "1237", "1132", "631", "873", "29", "931", "399", "1003", "31", "985", "762",
+               "350", "180", "984", "379", "543"]
+    print("Valid Team Names (must be word for word & case sensitive)")
+    for team in teamnames:
+        print(team)
+    print("================================================================================")
+    userTeam = input("What Team would you like Record Transfers for?: \n")
+
+    for i, x in enumerate(teamnames):
+        teamname = x
+        teamID = teamIDs[i]
+        if (teamname == userTeam):
+            print("================================================================================")
+            print(teamname.center(80 - len(teamname)))
+            getRecordTransfers(teamname, teamID)
+            print("================================================================================")
+            break
+        else:
+            continue
